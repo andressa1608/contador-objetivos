@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contadores Regressivos</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background: #f9f9f9;
+    }
+    .contador {
+      margin-bottom: 20px;
+      padding: 15px;
+      background: #e0e0e0;
+      border-radius: 8px;
+      box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+    }
+    h2 {
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="contador">
+    <h2>Objetivo 1: Cursos na Alura</h2>
+    <p id="contador1"></p>
+  </div>
+
+  <div class="contador">
+    <h2>Objetivo 2: Criar projetos em JavaScript</h2>
+    <p id="contador2"></p>
+  </div>
+
+  <script>
+    function iniciarContador(idElemento, dataObjetivo) {
+      const elemento = document.getElementById(idElemento);
+
+      function atualizarContador() {
+        const agora = new Date();
+        const diferenca = dataObjetivo - agora;
+
+        if (diferenca <= 0) {
+          elemento.textContent = "Objetivo alcançado!";
+          return;
+        }
+
+        const dias = Math.floor(diferenca / (1000 * 60 * 60 * 24));
+        const horas = Math.floor((diferenca % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutos = Math.floor((diferenca % (1000 * 60 * 60)) / (1000 * 60));
+        const segundos = Math.floor((diferenca % (1000 * 60)) / 1000);
+
+        elemento.textContent = `${dias}d ${horas}h ${minutos}m ${segundos}s`;
+      }
+
+      atualizarContador();
+      setInterval(atualizarContador, 1000);
+    }
+
+    // Define as datas dos objetivos
+    const objetivo1 = new Date("2025-04-20T00:00:00");
+    const objetivo2 = new Date("2025-05-10T00:00:00");
+
+    iniciarContador("contador1", objetivo1);
+    iniciarContador("contador2", objetivo2);
+  </script>
+
+</body>
+</html>
